@@ -5,12 +5,94 @@
   <script src="jquery-3.3.1.min.js"></script>
   <script src="popup.js"></script>
   <style>
-
-    #total{
-      background-color: gold;
+    .magentaText {
+      /* border: solid 2px #af4c7c; */
+      color: #af4c7c !important;
+      background-color: white;
+      transition: 0.4s;
     }
 
-    #myDiv{
+    .magentaHover{
+      background-color:  #af4c7c !important;
+    }
+
+    .magentaBorder {
+      border: solid 2px #af4c7c !important;
+    }
+
+    .magentaGradient{
+      background-image: linear-gradient(to bottom, #E27FAF, #af4c7c) !important;
+
+      
+
+    }
+
+    /* The switch - the box around the slider */
+
+    .switch {
+      position: relative;
+      display: inline-block;
+      width: 40px;
+      height: 17px;
+    }
+
+    /* Hide default HTML checkbox */
+
+    .switch input {
+      display: none;
+    }
+
+    /* The slider */
+
+    .slider {
+      position: absolute;
+      cursor: pointer;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: -4px;
+      background-color: #4CAF50;
+      -webkit-transition: .4s;
+      transition: .4s;
+    }
+
+    .slider:before {
+      position: absolute;
+      content: "";
+      height: 13px;
+      width: 13px;
+      left: 4px;
+      bottom: 4px;
+      background-color: white;
+      -webkit-transition: .4s;
+      transition: .4s;
+    }
+
+    input:checked+.slider {
+      background-color: #af4c7c;
+    }
+
+    input:focus+.slider {
+      box-shadow: 0 0 1px #af4c7c;
+    }
+
+    input:checked+.slider:before {
+      -webkit-transform: translateX(20px);
+      -ms-transform: translateX(20px);
+      transform: translateX(20px);
+    }
+
+    /* Rounded sliders */
+
+    .slider.round {
+      border-radius: 17px;
+    }
+
+    .slider.round:before {
+      border-radius: 50%;
+    }
+
+    #myDiv {
       width: 50px;
       height: 50px;
     }
@@ -38,8 +120,13 @@
       width: 250px;
     }
 
-    body{
+    body {
       width: 425px;
+    }
+
+    #output {
+      color: #4CAF50;
+      font-size: 125%;
     }
 
     .score {
@@ -60,21 +147,31 @@
     }
 
     .selected {
-      background-image: linear-gradient(to bottom, #7bce7f, #4CAF50);
+      background-image: linear-gradient(to bottom, #7FE283, #4CAF50);
       color: white;
     }
 
-    .assignmentMessage{
-        width: 250px;
-        background-color: white;
-        font-size: 75%;
-        border-bottom: dotted 1px gray;
+    .assignmentMessage {
+      width: 250px;
+      background-color: white;
+      font-size: 75%;
+      border-bottom: dotted 1px gray;
     }
   </style>
 </head>
 
 <body>
-  How Many Course Would You Like To Analyze?
+
+  <span id="status">Triage</span> Mode
+  <br>
+  <br>
+
+  <label class="switch">
+    <input type="checkbox" id="toggleSwitch">
+    <span class="slider round"></span>
+  </label>
+  <br>
+  <br> How Many Course Would You Like To Analyze?
   <br>
   <br>
   <input type="range" min="0" max="21" step="1" value="0" list="tickmarks" id="slider">
@@ -107,8 +204,13 @@
   <br>
   <br>
   <table id="myTable"></table>
-  <br><br>
-  <span id="total">0</span>
+  <br>
+  <br>
+  <strong>
+    <span id="output">Average Triage Grade:
+      <span id="total">0</span>
+    </span>
+  </strong>
 </body>
 
 </html>

@@ -1,4 +1,30 @@
 $(document).ready(function () {
+    var $currentMode = "Triage";
+
+
+
+
+    $("#toggleSwitch").change(function(){   
+        
+        //Fix Mode Switching
+            //flip current
+            //flip all afterwards
+            //while
+            if($("#toggleSwitch").prop("checked")){
+                $currentMode = "Standard";
+            }else{
+                $currentMode = "Triage";
+            }
+        
+            $("#status").text($currentMode)
+
+            $("#output").toggleClass("magentaText");
+            $(".score").toggleClass("magentaBorder");
+            $(".selected").toggleClass("magentaGradient");
+
+
+
+    });
 
     var $numberOfAssignmnets = parseInt($("#slider").val());
     var $runningTotal = new Array();
@@ -25,12 +51,17 @@ $(document).ready(function () {
         DisplayAssignmentFeedback($(this));
         $(this).siblings().removeClass('selected');
 
-        //and text to list
-        
+        var count = 0;
+        $(".selected").each(function(){
+            count += parseInt($(this).text());
+        });
 
-        $("#total").text(parseInt($("#total").text()) + parseInt($(this).text()));
-        //displan in span
+        var averageTriageGrade = (count / $(".selected").length);
+        $("#total").text(averageTriageGrade);
+
+
     });
+
 
 
 });
