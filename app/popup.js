@@ -1,29 +1,24 @@
 $(document).ready(function () {
     var $currentMode = "Triage";
 
+    $("#toggleSwitch").change(function () {
+
+        if ($("#toggleSwitch").prop("checked")) {
+            $currentMode = "Standard";
+        } else {
+            $currentMode = "Triage";
+        }
 
 
+        //toggling
 
-    $("#toggleSwitch").change(function(){   
-        
-        //Fix Mode Switching
-            //flip current
-            //flip all afterwards
-            //while
-            if($("#toggleSwitch").prop("checked")){
-                $currentMode = "Standard";
-            }else{
-                $currentMode = "Triage";
-            }
-        
-            $("#status").text($currentMode)
+        $("#status").text($currentMode)
 
-            $("#output").toggleClass("magentaText");
-            $(".score").toggleClass("magentaBorder");
-            $(".selected").toggleClass("magentaGradient");
-
-
-
+        $("#output").toggleClass("magentaText");
+        // $(".score").toggleClass("magentaBorder");
+        // $(".selected").toggleClass("magentaGradient");
+        $("td").toggleClass("triage");
+        $("td").toggleClass("standard");
     });
 
     var $numberOfAssignmnets = parseInt($("#slider").val());
@@ -32,18 +27,51 @@ $(document).ready(function () {
     $("#slider").on("input", function () {
         //Fix issue with slider, I think it is varibale related
 
-        if (parseInt($(this).val()) > $numberOfAssignmnets) {
-            $("#mySpan").html($(this).val());
-            $("#myTable").append("<tr><td class='rowHeader'>Assignment " + $(this).val() +
-                "</td><td class='score' >0</td><td class='score'>1</td><td class='score'>2</td><td class='score'>3</td><td class='assignmentMessage'></td></tr>");
+        if ($currentMode == "Standard") {
+            if (parseInt($(this).val()) > $numberOfAssignmnets) {
+                $("#mySpan").html($(this).val());
+                $("#myTable").append("<tr><td class='rowHeader'>Assignment " + $(this).val() +
+                    "</td><td class='score standard' >0</td><td class='score standard'>1</td><td class='score standard'>2</td><td class='score standard'>3</td><td class='assignmentMessage'></td></tr>");
 
-            $numberOfAssignmnets++;
+                $numberOfAssignmnets++;
 
-        } else if (parseInt($(this).val()) < $numberOfAssignmnets) {
-            $("#mySpan").html($(this).val());
-            $("tr").last().remove();
-            $numberOfAssignmnets--;
+            } else if (parseInt($(this).val()) < $numberOfAssignmnets) {
+                $("#mySpan").html($(this).val());
+                $("tr").last().remove();
+                $numberOfAssignmnets--;
+            }
+
+
+
+
+
+        } else if ($currentMode == "Triage") {
+            if (parseInt($(this).val()) > $numberOfAssignmnets) {
+                $("#mySpan").html($(this).val());
+                $("#myTable").append("<tr><td class='rowHeader'>Assignment " + $(this).val() +
+                    "</td><td class='score triage' >0</td><td class='score triage'>1</td><td class='score triage'>2</td><td class='score triage'>3</td><td class='assignmentMessage'></td></tr>");
+
+                $numberOfAssignmnets++;
+
+            } else if (parseInt($(this).val()) < $numberOfAssignmnets) {
+                $("#mySpan").html($(this).val());
+                $("tr").last().remove();
+                $numberOfAssignmnets--;
+            }
         }
+
+
+
+
+
+
+
+
+
+
+
+
+
     });
 
     $("#myTable").on("click", ".score", function () {
@@ -52,7 +80,7 @@ $(document).ready(function () {
         $(this).siblings().removeClass('selected');
 
         var count = 0;
-        $(".selected").each(function(){
+        $(".selected").each(function () {
             count += parseInt($(this).text());
         });
 

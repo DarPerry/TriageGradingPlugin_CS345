@@ -6,24 +6,22 @@
   <script src="popup.js"></script>
   <style>
     .magentaText {
-      /* border: solid 2px #af4c7c; */
       color: #af4c7c !important;
-      background-color: white;
       transition: 0.4s;
     }
 
-    .magentaHover{
-      background-color:  #af4c7c !important;
+    .magentaHover {
+      background-color: #af4c7c;
     }
 
     .magentaBorder {
-      border: solid 2px #af4c7c !important;
+      border: solid 2px #af4c7c;
     }
 
-    .magentaGradient{
-      background-image: linear-gradient(to bottom, #E27FAF, #af4c7c) !important;
 
-      
+
+    .magentaGradient {
+      background-image: linear-gradient(to bottom, #E27FAF, #af4c7c) !important;
 
     }
 
@@ -129,26 +127,55 @@
       font-size: 125%;
     }
 
-    .score {
+
+
+
+
+
+
+
+
+    .score.triage:hover {
+      color: whitesmoke;
+      background-color: #4CAF50;
+    }
+
+    .score.standard:hover {
+      color: whitesmoke;
+      background-color: #af4c7c;
+    }
+
+    .selected.standard {
+      background-image: linear-gradient(to bottom, #E27FAF, #af4c7c);
+      color: white;
+    }
+
+    .selected.triage {
+      background-image: linear-gradient(to bottom, #7FE283, #4CAF50);
+      color: white;
+    }
+
+    .score.triage {
       border: solid 2px#4CAF50;
       background-color: whitesmoke;
       transition: 0.4s;
     }
 
-    .score:hover {
-      color: whitesmoke;
-      background-color: #4CAF50;
+    .score.standard {
+      border: solid 2px#af4c7c;
+      background-color: whitesmoke;
+      transition: 0.4s;
     }
+
+
+
+
+
 
     .rowHeader {
       width: 100px;
       background-color: white;
       border: none;
-    }
-
-    .selected {
-      background-image: linear-gradient(to bottom, #7FE283, #4CAF50);
-      color: white;
     }
 
     .assignmentMessage {
