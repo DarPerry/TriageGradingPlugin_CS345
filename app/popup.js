@@ -3,6 +3,10 @@ $(document).ready(function () {
 
     $("#toggleSwitch").change(function () {
 
+        $("#standardModeHeader").toggleClass("unselectedMode");
+        $("#triageModeHeader").toggleClass("unselectedMode");
+
+
 
         if ($("#toggleSwitch").prop("checked")) {
             $currentMode = "Standard";
@@ -10,8 +14,9 @@ $(document).ready(function () {
             $currentMode = "Triage";
         }
 
-        $("#status").text($currentMode)
+        $("#status").text($currentMode + " Mode")
 
+        $("#status").toggleClass("magentaText");
         $("#output").toggleClass("magentaText");
         $("td").toggleClass("triage");
         $("td").toggleClass("standard");
@@ -150,7 +155,7 @@ function ShowTriageGrade() {
     });
 
     var averageTriageGrade = (count / $(".selected").length);
-    $("#total").text(averageTriageGrade);
+    $("#total").text(averageTriageGrade.toFixed(2));
 }
 
 function ShowStandardGrade() {

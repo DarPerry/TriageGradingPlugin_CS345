@@ -1,254 +1,66 @@
-<!doctype html>
+<!DOCTYPE html>
 <html>
 
 <head>
   <script src="jquery-3.3.1.min.js"></script>
   <script src="popup.js"></script>
-  <style>
-    .magentaText {
-      color: #af4c7c !important;
-      transition: 0.4s;
-    }
-
-    .magentaHover {
-      background-color: #af4c7c;
-    }
-
-    .magentaBorder {
-      border: solid 2px #af4c7c;
-    }
-
-
-
-    .magentaGradient {
-      background-image: linear-gradient(to bottom, #E27FAF, #af4c7c) !important;
-
-    }
-
-    /* The switch - the box around the slider */
-
-    .switch {
-      position: relative;
-      display: inline-block;
-      width: 40px;
-      height: 17px;
-    }
-
-    /* Hide default HTML checkbox */
-
-    .switch input {
-      display: none;
-    }
-
-    /* The slider */
-
-    .slider {
-      position: absolute;
-      cursor: pointer;
-      top: 0;
-      left: 0;
-      right: 0;
-      bottom: -4px;
-      background-color: #4CAF50;
-      -webkit-transition: .4s;
-      transition: .4s;
-    }
-
-    .slider:before {
-      position: absolute;
-      content: "";
-      height: 13px;
-      width: 13px;
-      left: 4px;
-      bottom: 4px;
-      background-color: white;
-      -webkit-transition: .4s;
-      transition: .4s;
-    }
-
-    input:checked+.slider {
-      background-color: #af4c7c;
-    }
-
-    input:focus+.slider {
-      box-shadow: 0 0 1px #af4c7c;
-    }
-
-    input:checked+.slider:before {
-      -webkit-transform: translateX(20px);
-      -ms-transform: translateX(20px);
-      transform: translateX(20px);
-    }
-
-    /* Rounded sliders */
-
-    .slider.round {
-      border-radius: 17px;
-    }
-
-    .slider.round:before {
-      border-radius: 50%;
-    }
-
-    #myDiv {
-      width: 50px;
-      height: 50px;
-    }
-
-    td {
-      width: 25px;
-      height: 25px;
-    }
-
-    td {
-      background-color: #e7e7e7;
-    }
-
-    body {
-      min-width: 250px;
-      text-align: center;
-      font-family: "Trebuchet MS";
-    }
-
-    table {
-      margin: auto;
-    }
-
-    #slider {
-      width: 250px;
-    }
-
-    body {
-      width: 425px;
-    }
-
-    #output {
-      color: #4CAF50;
-      font-size: 125%;
-    }
-
-
-
-
-
-
-
-
-
-    .score.triage:hover {
-      color: whitesmoke;
-      background-color: #4CAF50;
-      transition: 0.4s;
-
-    }
-
-    .score.standard:hover {
-      color: whitesmoke;
-      background-color: #af4c7c;
-      transition: 0.4s;
-
-    }
-
-    .selected.standard {
-      background-image: linear-gradient(to bottom, #E27FAF, #af4c7c);
-      color: white;
-      transition: 0.4s;
-
-    }
-
-    .selected.triage {
-      background-image: linear-gradient(to bottom, #7FE283, #4CAF50);
-      color: white;
-      transition: 0.4s;
-
-    }
-
-    .score.triage {
-      border: solid 2px#4CAF50;
-      background-color: whitesmoke;
-      transition: 0.4s;
-    }
-
-    .score.standard {
-      border: solid 2px#af4c7c;
-      background-color: whitesmoke;
-      transition: 0.4s;
-    }
-
-
-
-
-
-
-    .rowHeader {
-      width: 100px;
-      background-color: white;
-      border: none;
-    }
-
-    .assignmentMessage {
-      width: 250px;
-      background-color: white;
-      font-size: 75%;
-      border-bottom: dotted 1px gray;
-    }
-  </style>
+  <link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css"/>
 </head>
 
 <body>
-
-  <span id="status">Triage</span> Mode
-  <br>
-  <br>
-
+  <strong>
+    <span id="triageModeHeader">Triage Mode</span> &nbsp;
+  </strong>
   <label class="switch">
     <input type="checkbox" id="toggleSwitch">
     <span class="slider round"></span>
   </label>
-  <br>
-  <br> How Many Course Would You Like To Analyze?
-  <br>
-  <br>
-  <input type="range" min="0" max="21" step="1" value="0" list="tickmarks" id="slider">
-  <datalist id="tickmarks">
-    <option value="0">
-      <option value="1">
-        <option value="2">
-          <option value="3">
-            <option value="4">
-              <option value="5">
-                <option value="6">
-                  <option value="7">
-                    <option value="8">
-                      <option value="9">
-                        <option value="10">
-                          <option value="11">
-                            <option value="12">
-                              <option value="13">
-                                <option value="14">
-                                  <option value="15">
-                                    <option value="16">
-                                      <option value="17">
-                                        <option value="18">
-                                          <option value="19">
-                                            <option value="20">
-                                              <option value="21">
-  </datalist>
-  <br>
-  <span id="mySpan">0</span> Assignment(s)
-  <br>
-  <br>
-  <table id="myTable"></table>
-  <br>
-  <br>
+  &nbsp;
   <strong>
-    <span id="output">Average Triage Grade:
-      <span id="total">0</span>
-    </span>
-  </strong>
+    </bold>
+    <span id="standardModeHeader" class="unselectedMode">Standard Mode</span>
+    <strong>
 
-  <span id="testSpan"></span>
-
+      <br>
+      <br> How Many Course Would You Like To Analyze?
+      <br>
+      <br>
+      <input type="range" min="0" max="21" step="1" value="0" list="tickmarks" id="slider">
+      <datalist id="tickmarks">
+        <option value="0">
+          <option value="1">
+            <option value="2">
+              <option value="3">
+                <option value="4">
+                  <option value="5">
+                    <option value="6">
+                      <option value="7">
+                        <option value="8">
+                          <option value="9">
+                            <option value="10">
+                              <option value="11">
+                                <option value="12">
+                                  <option value="13">
+                                    <option value="14">
+                                      <option value="15">
+                                        <option value="16">
+                                          <option value="17">
+                                            <option value="18">
+                                              <option value="19">
+                                                <option value="20">
+                                                  <option value="21">
+      </datalist>
+      <br>
+      <span id="mySpan">0</span> Assignment(s)
+      <br>
+      <br>
+      <table id="myTable"></table>
+      <br>
+      <strong>
+        <span id="output">Average Triage Grade:
+          <span id="total">0</span>
+        </span>
+      </strong>
+      <span id="testSpan"></span>
 </body>
-
 </html>

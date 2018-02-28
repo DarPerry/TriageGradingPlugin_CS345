@@ -1,7 +1,7 @@
 {
   "manifest_version": 2,
-  "name": "Debendra calculator",
-  "description": "This extension by debendra256",
+  "name": "Triage Grading Tool",
+  "description": "CS 345 (Human Computer Interaction) Midterm Project. An attempt to facilitate new students in transitioning from standard grading scale to triage grading scale. By Darius J. Perry.",
   "version": "1.0",
   "permissions": [
     "notifications"
