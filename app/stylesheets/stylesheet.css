@@ -168,9 +168,17 @@ body {
 }
 
 .rowHeader {
-    width: 100px;
+    width: 125px;
     background-color: white;
     border: none;
+}
+
+#newText{
+    width: 100px;
+    font-family: 'Trebuchet MS';
+    font-size: 95%;
+    font-weight: bold;
+    
 }
 
 .assignmentMessage {
@@ -178,4 +186,10 @@ body {
     background-color: white;
     font-size: 75%;
     border-bottom: dotted 1px gray;
+}
+
+
+#increase, #decrease{
+    width: 10px;
+    height: 10px;
 }

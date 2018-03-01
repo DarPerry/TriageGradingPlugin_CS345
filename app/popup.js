@@ -1,7 +1,43 @@
 $(document).ready(function () {
     var $currentMode = "Triage";
 
+
+    $("#myTable").on("dblclick", ".rowHeader", function () {
+
+            $(this).replaceWith("<td class='rowHeader'><input type = 'text' id = 'newText'></td>");
+           
+    });
+
+    $("#myTable").on("keypress", "#newText", function (e) {
+
+        if(e.which == 13){
+            $newText = $(this).val();
+                $(this).replaceWith("<td class='rowHeader'> " + $newText + "</td>");
+        }
+    })
+
+    $("#myTable").on("click", "#increase", function () {
+        var counter =-1;
+
+        $(this).parent().find(".score").each(function(score){
+            counter +=1;
+
+            $(this).text(parseInt($(this).text()) + counter);
+        })
+    })
+
+    $("#myTable").on("click", "#decrease", function () {
+        var counter =-1;
+
+        $(this).parent().find(".score").each(function(score){
+            counter +=1;
+
+            $(this).text(parseInt($(this).text()) - counter);
+        })
+    })
+
     $("#toggleSwitch").change(function () {
+        
 
         $("#standardModeHeader").toggleClass("unselectedMode");
         $("#triageModeHeader").toggleClass("unselectedMode");
@@ -59,13 +95,20 @@ $(document).ready(function () {
     var $numberOfAssignmnets = parseInt($("#slider").val());
     var $runningTotal = new Array();
 
+
+
+
+
+
+
     $("#slider").on("input", function () {
 
         if ($currentMode == "Standard") {
             if (parseInt($(this).val()) > $numberOfAssignmnets) {
+
+
                 $("#mySpan").html($(this).val());
-                $("#myTable").append("<tr><td class='rowHeader'>Assignment " + $(this).val() +
-                    "</td><td class='score standard' >0</td><td class='score standard'>1</td><td class='score standard'>2</td><td class='score standard'>3</td><td class='assignmentMessage'></td></tr>");
+                $("#myTable").append("<tr><td class='rowHeader'>New Assignment</td><td id='decrease'>-</td><td class='score standard' value = 'first' >0</td><td class='score standard'>1</td><td class='score standard'>2</td><td class='score standard'>3</td><td id='increase'>+</td><td class='assignmentMessage'></td></tr>");
 
                 $numberOfAssignmnets++;
 
@@ -77,9 +120,12 @@ $(document).ready(function () {
 
         } else if ($currentMode == "Triage") {
             if (parseInt($(this).val()) > $numberOfAssignmnets) {
+
+                var assignmentNumber = $(this).val();
+                
+
                 $("#mySpan").html($(this).val());
-                $("#myTable").append("<tr><td class='rowHeader'>Assignment " + $(this).val() +
-                    "</td><td class='score triage' >0</td><td class='score triage'>1</td><td class='score triage'>2</td><td class='score triage'>3</td><td class='assignmentMessage'></td></tr>");
+                $("#myTable").append("<tr><td class='rowHeader'>New Assignment</td><td id='decrease'>-</td></td><td class='score triage' >0</td><td class='score triage'>1</td><td class='score triage'>2</td><td class='score triage'>3</td><td id='increase'>+</td><td class='assignmentMessage'></td></tr>");
                 $numberOfAssignmnets++;
 
             } else if (parseInt($(this).val()) < $numberOfAssignmnets) {
