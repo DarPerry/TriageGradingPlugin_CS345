@@ -1,43 +1,69 @@
 $(document).ready(function () {
     var $currentMode = "Triage";
+    var numberOfAssignmnets = 0;
+
+
+    $("#addAssignmentBtn").click(function () {
+        if ($currentMode == "Standard") {
+            numberOfAssignmnets++;
+            $("#mySpan").html(numberOfAssignmnets);
+            $("#myTable").append("<tr><td class='rowHeader'>New Assignment</td><td id='decrease'>-</td><td class='score standard' value = 'first' >0</td><td class='score standard'>1</td><td class='score standard'>2</td><td class='score standard'>3</td><td id='increase'>+</td><td class='assignmentMessage'></td></tr>");
+
+
+        } else if ($currentMode == "Triage") {
+            numberOfAssignmnets++;
+            $("#mySpan").html(numberOfAssignmnets);
+            $("#myTable").append("<tr><td class='rowHeader'>New Assignment</td><td id='decrease'>-</td></td><td class='score triage' >0</td><td class='score triage'>1</td><td class='score triage'>2</td><td class='score triage'>3</td><td id='increase'>+</td><td class='assignmentMessage'></td></tr>");
+        }
+
+    })
+
+    $("#subtractAssignmentBtn").click(function () {
+        if (numberOfAssignmnets > 0) {
+            numberOfAssignmnets--;
+            $("#mySpan").html(numberOfAssignmnets);
+            $("tr").last().remove();
+        }
+    })
 
 
     $("#myTable").on("dblclick", ".rowHeader", function () {
 
-            $(this).replaceWith("<td class='rowHeader'><input type = 'text' id = 'newText'></td>");
-           
+        $(this).replaceWith("<td class='rowHeader'><input type = 'text' id = 'newText'></td>");
+
     });
 
     $("#myTable").on("keypress", "#newText", function (e) {
 
-        if(e.which == 13){
+        if (e.which == 13) {
             $newText = $(this).val();
-                $(this).replaceWith("<td class='rowHeader'> " + $newText + "</td>");
+            $(this).replaceWith("<td class='rowHeader'> " + $newText + "</td>");
         }
     })
 
     $("#myTable").on("click", "#increase", function () {
-        var counter =-1;
+        var counter = -1;
 
-        $(this).parent().find(".score").each(function(score){
-            counter +=1;
+        $(this).parent().find(".score").each(function (score) {
+            counter += 1;
 
             $(this).text(parseInt($(this).text()) + counter);
         })
     })
 
     $("#myTable").on("click", "#decrease", function () {
-        var counter =-1;
+        var counter = -1;
 
-        $(this).parent().find(".score").each(function(score){
-            counter +=1;
 
-            $(this).text(parseInt($(this).text()) - counter);
-        })
+            $(this).parent().find(".score").each(function (score) {
+                counter += 1;
+
+                $(this).text(parseInt($(this).text()) - counter);
+            })
     })
 
     $("#toggleSwitch").change(function () {
-        
+
 
         $("#standardModeHeader").toggleClass("unselectedMode");
         $("#triageModeHeader").toggleClass("unselectedMode");
@@ -60,32 +86,32 @@ $(document).ready(function () {
         if ($currentMode == "Standard") {
             ShowStandardGrade();
             $(".standard.selected").each(function (selectedScore) {
-                if ($(this).text() == '0') {
+                if ($(this).is(" tr .score:nth-child(3)")) {
                     $(this).parent().find(".assignmentMessage").html("Letter Grade: 'F'");
                 }
-                if ($(this).text() == '1') {
+                if ($(this).is(" tr .score:nth-child(4)")) {
                     $(this).parent().find(".assignmentMessage").html("Letter Grade: 'D'");
                 }
-                if ($(this).text() == '2') {
+                if ($(this).is(" tr .score:nth-child(5)")) {
                     $(this).parent().find(".assignmentMessage").html("Letter Grade: 'C' (Average)");
                 }
-                if ($(this).text() == '3') {
+                if ($(this).is(" tr .score:nth-child(6)")) {
                     $(this).parent().find(".assignmentMessage").html("Letter Grade: 'A'");
                 }
             })
         } else if ($currentMode == "Triage") {
             ShowTriageGrade();
             $(".triage.selected").each(function (selectedScore) {
-                if ($(this).text() == '0') {
+                if ($(this).is(" tr .score:nth-child(3)")) {
                     $(this).parent().find(".assignmentMessage").html("Assignment Not Done.");
                 }
-                if ($(this).text() == '1') {
+                if ($(this).is(" tr .score:nth-child(4)")) {
                     $(this).parent().find(".assignmentMessage").html("Assignment Done, But Clearly Incorrect.");
                 }
-                if ($(this).text() == '2') {
+                if ($(this).is(" tr .score:nth-child(5)")) {
                     $(this).parent().find(".assignmentMessage").html("Assignment Done, But Only Partially Correct.");
                 }
-                if ($(this).text() == '3') {
+                if ($(this).is(" tr .score:nth-child(6)")) {
                     $(this).parent().find(".assignmentMessage").html("Assignment Done, and Clearly Correct.");
                 }
             })
@@ -101,40 +127,7 @@ $(document).ready(function () {
 
 
 
-    $("#slider").on("input", function () {
 
-        if ($currentMode == "Standard") {
-            if (parseInt($(this).val()) > $numberOfAssignmnets) {
-
-
-                $("#mySpan").html($(this).val());
-                $("#myTable").append("<tr><td class='rowHeader'>New Assignment</td><td id='decrease'>-</td><td class='score standard' value = 'first' >0</td><td class='score standard'>1</td><td class='score standard'>2</td><td class='score standard'>3</td><td id='increase'>+</td><td class='assignmentMessage'></td></tr>");
-
-                $numberOfAssignmnets++;
-
-            } else if (parseInt($(this).val()) < $numberOfAssignmnets) {
-                $("#mySpan").html($(this).val());
-                $("tr").last().remove();
-                $numberOfAssignmnets--;
-            }
-
-        } else if ($currentMode == "Triage") {
-            if (parseInt($(this).val()) > $numberOfAssignmnets) {
-
-                var assignmentNumber = $(this).val();
-                
-
-                $("#mySpan").html($(this).val());
-                $("#myTable").append("<tr><td class='rowHeader'>New Assignment</td><td id='decrease'>-</td></td><td class='score triage' >0</td><td class='score triage'>1</td><td class='score triage'>2</td><td class='score triage'>3</td><td id='increase'>+</td><td class='assignmentMessage'></td></tr>");
-                $numberOfAssignmnets++;
-
-            } else if (parseInt($(this).val()) < $numberOfAssignmnets) {
-                $("#mySpan").html($(this).val());
-                $("tr").last().remove();
-                $numberOfAssignmnets--;
-            }
-        }
-    });
 
     $("#myTable").on("click", ".score", function () {
 
@@ -159,37 +152,37 @@ $(document).ready(function () {
 });
 
 function DisplayTriageAssignmentFeedback(score) {
-    if ($(score).text() == "0") {
+    if ($(score).is(" tr .score:nth-child(3)")) {
         $(score).parent().find(".assignmentMessage").html("Assignment Not Done.");
     }
 
-    if ($(score).text() == "1") {
+    if ($(score).is(" tr .score:nth-child(4)")) {
         $(score).parent().find(".assignmentMessage").html("Assignment Done, But Clearly Incorrect.");
     }
 
-    if ($(score).text() == "2") {
+    if ($(score).is(" tr .score:nth-child(5)")) {
         $(score).parent().find(".assignmentMessage").html("Assignment Done, But Only Partially Correct.");
     }
 
-    if ($(score).text() == "3") {
+    if ($(score).is(" tr .score:nth-child(6)")) {
         $(score).parent().find(".assignmentMessage").html("Assignment Done, and Clearly Correct.");
     }
 }
 
 function DisplayStandardAssignmentFeedback(score) {
-    if ($(score).text() == "0") {
+    if ($(score).is(" tr .score:nth-child(3)")) {
         $(score).parent().find(".assignmentMessage").html("Letter Grade: 'F'");
     }
 
-    if ($(score).text() == "1") {
+    if ($(score).is(" tr .score:nth-child(4)")) {
         $(score).parent().find(".assignmentMessage").html("Letter Grade: 'D'");
     }
 
-    if ($(score).text() == "2") {
+    if ($(score).is(" tr .score:nth-child(5)")) {
         $(score).parent().find(".assignmentMessage").html("Letter Grade: 'C' (Average)");
     }
 
-    if ($(score).text() == "3") {
+    if ($(score).is(" tr .score:nth-child(6)")) {
         $(score).parent().find(".assignmentMessage").html("Letter Grade: 'A'");
     }
 }
