@@ -42,6 +42,9 @@ $(document).ready(function () {
     })
 
     $("#myTable").on("click", "#increase", function () {
+
+
+
         var counter = -1;
 
         $(this).parent().find(".score").each(function (score) {
@@ -49,10 +52,16 @@ $(document).ready(function () {
 
             $(this).text(parseInt($(this).text()) + counter);
         })
+        if ($currentMode == "Triage") {
+            ShowTriageGrade();
+        } else if ($currentMode == "Standard") {
+            ShowStandardGrade();
+        }
     })
 
     $("#myTable").on("click", "#decrease", function () {
-        var counter = -1;
+        if (parseInt($(this).parent().find(".score:nth-child(4)").html()) > 1) {
+            var counter = -1;
 
 
             $(this).parent().find(".score").each(function (score) {
@@ -60,6 +69,12 @@ $(document).ready(function () {
 
                 $(this).text(parseInt($(this).text()) - counter);
             })
+            if ($currentMode == "Triage") {
+                ShowTriageGrade();
+            } else if ($currentMode == "Standard") {
+                ShowStandardGrade();
+            }
+        }
     })
 
     $("#toggleSwitch").change(function () {
@@ -203,7 +218,8 @@ function ShowStandardGrade() {
 
     $(".selected").each(function () {
         studentScore += parseInt($(this).text());
-        totalPoints += 3;
+        
+        totalPoints += parseInt($(this).parent().find(".score:nth-child(6)").html()) ;
     });
 
 
