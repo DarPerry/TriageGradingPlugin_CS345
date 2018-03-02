@@ -133,12 +133,13 @@ function DisplayStandardAssignmentFeedback(score) {
 
 function ShowTriageGrade() {
     var count = 0;
+    var totalPoints = 0;
     $(".selected").each(function () {
         count += parseInt($(this).text());
+        totalPoints += parseInt($(this).parent().find(".score:nth-child(6)").html());
     });
 
-    var averageTriageGrade = (count / $(".selected").length);
-    $("#total").text(averageTriageGrade.toFixed(2));
+    $("#total").text(count + " of " + totalPoints + " (" + (count/totalPoints).toFixed(2) * 100 + "%)");
 }
 
 function ShowStandardGrade() {
