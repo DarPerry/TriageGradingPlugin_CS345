@@ -3,20 +3,6 @@
     transition: 0.4s;
 }
 
-.magentaHover {
-    background-color: #af4c7c;
-}
-
-.magentaBorder {
-    border: solid 2px #af4c7c;
-}
-
-.magentaGradient {
-    background-image: linear-gradient(to bottom, #E27FAF, #af4c7c) !important;
-}
-
-/* The switch - the box around the slider */
-
 .switch {
     position: relative;
     display: inline-block;
@@ -24,13 +10,9 @@
     height: 17px;
 }
 
-/* Hide default HTML checkbox */
-
 .switch input {
     display: none;
 }
-
-/* The slider */
 
 .slider {
     position: absolute;
@@ -70,8 +52,6 @@ input:checked+.slider:before {
     transform: translateX(20px);
 }
 
-/* Rounded sliders */
-
 .slider.round {
     border-radius: 17px;
 }
@@ -80,17 +60,9 @@ input:checked+.slider:before {
     border-radius: 50%;
 }
 
-#myDiv {
-    width: 50px;
-    height: 50px;
-}
-
 td {
     width: 25px;
     height: 25px;
-}
-
-td {
     background-color: #e7e7e7;
 }
 
@@ -98,6 +70,7 @@ body {
     min-width: 250px;
     text-align: center;
     font-family: "Trebuchet MS";
+    width: 425px;
 }
 
 table {
@@ -106,10 +79,6 @@ table {
 
 #slider {
     width: 250px;
-}
-
-body {
-    width: 425px;
 }
 
 #output,
@@ -173,12 +142,11 @@ body {
     border: none;
 }
 
-#newText{
+#newText {
     width: 100px;
     font-family: 'Trebuchet MS';
     font-size: 95%;
     font-weight: bold;
-    
 }
 
 .assignmentMessage {
@@ -188,8 +156,13 @@ body {
     border-bottom: dotted 1px gray;
 }
 
-
-#increase, #decrease{
+#increase,
+#decrease {
     width: 10px;
     height: 10px;
+}
+
+#increase:hover,
+#decrease:hover {
+    cursor: pointer;
 }
